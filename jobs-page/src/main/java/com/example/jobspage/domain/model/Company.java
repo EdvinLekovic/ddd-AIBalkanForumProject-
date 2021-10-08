@@ -26,7 +26,6 @@ public class Company extends AbstractEntity<CompanyId> {
 
     private String country;
 
-
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Job> jobList = new ArrayList<>();
 
