@@ -2,5 +2,5 @@ package com.example.sharedkernel.domain.base;
 
 import java.io.Serializable;
 
-public class DomainObject implements Serializable {
+public interface DomainObject extends Serializable {
 }

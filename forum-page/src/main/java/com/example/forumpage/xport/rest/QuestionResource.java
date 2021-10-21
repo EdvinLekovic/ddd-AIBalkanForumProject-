@@ -1,4 +1,4 @@
-package com.example.forumpage.xport;
+package com.example.forumpage.xport.rest;
 
 import com.example.forumpage.domain.models.Answer;
 import com.example.forumpage.domain.models.Question;
@@ -16,6 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/questions")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:3000")
 public class QuestionResource {
 
     private final QuestionService questionService;
@@ -36,13 +37,13 @@ public class QuestionResource {
     }
 
     @PostMapping("/createQuestion")
-    public void createQuestion(QuestionForm questionForm) {
+    public void createQuestion(@RequestBody QuestionForm questionForm) {
         questionService.createQuestion(questionForm);
     }
 
     @DeleteMapping("/deleteQuestion/{id}")
-    public void deleteQuestion(@PathVariable QuestionId id) {
-        questionService.deleteQuestion(id);
+    public void deleteQuestion(@PathVariable String id) {
+        questionService.deleteQuestion(new QuestionId(id));
     }
 
     @PostMapping("/createAnswer")

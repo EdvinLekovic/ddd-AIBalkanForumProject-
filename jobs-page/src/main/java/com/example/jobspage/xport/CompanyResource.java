@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/companies")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:3000")
 public class CompanyResource {
 
     private final CompanyService companyService;

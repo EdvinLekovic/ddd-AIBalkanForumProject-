@@ -23,5 +23,4 @@ public class Answer extends AbstractEntity<AnswerId> {
         this.description = description;
     }
 
-
 }

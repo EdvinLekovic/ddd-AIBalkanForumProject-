@@ -6,17 +6,20 @@ import com.example.forumpage.domain.models.Question;
 import com.example.forumpage.domain.models.ids.AnswerId;
 import com.example.forumpage.domain.models.ids.QuestionId;
 import com.example.forumpage.domain.repository.QuestionRepository;
+import com.example.forumpage.domain.valueobjects.UserId;
 import com.example.forumpage.service.QuestionService;
 import com.example.forumpage.service.form.AnswerForm;
 import com.example.forumpage.service.form.QuestionForm;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
@@ -38,7 +41,8 @@ public class QuestionServiceImpl implements QuestionService {
                 new Question(questionForm.getTitle(),
                         questionForm.getDescription(),
                         questionForm.getAnswerList(),
-                        LocalDateTime.now());
+                        LocalDateTime.now(),
+                        new UserId(questionForm.getUserId()));
         questionRepository.saveAndFlush(question);
         return question.getId();
     }

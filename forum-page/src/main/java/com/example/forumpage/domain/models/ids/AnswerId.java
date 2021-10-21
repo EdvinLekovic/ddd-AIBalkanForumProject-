@@ -12,4 +12,8 @@ public class AnswerId extends DomainObjectId {
     public AnswerId(@NonNull String uuid){
         super(uuid);
     }
+
+    public static AnswerId of(String uuid){
+        return new AnswerId(uuid);
+    }
 }

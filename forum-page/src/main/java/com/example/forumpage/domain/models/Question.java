@@ -2,6 +2,7 @@ package com.example.forumpage.domain.models;
 
 import com.example.forumpage.domain.models.ids.AnswerId;
 import com.example.forumpage.domain.models.ids.QuestionId;
+import com.example.forumpage.domain.valueobjects.UserId;
 import com.example.sharedkernel.domain.base.AbstractEntity;
 import lombok.Getter;
 
@@ -24,6 +25,8 @@ public class Question extends AbstractEntity<QuestionId> {
 
     private LocalDateTime dateCreated;
 
+    private UserId userId;
+
     protected Question(){
         super(QuestionId.randomId(QuestionId.class));
     }
@@ -31,12 +34,14 @@ public class Question extends AbstractEntity<QuestionId> {
     public Question(String title,
                     String description,
                     List<Answer> answerList,
-                    LocalDateTime dateCreated) {
+                    LocalDateTime dateCreated,
+                    UserId userId) {
         super(QuestionId.randomId(QuestionId.class));
         this.title = title;
         this.description = description;
         this.answerList = answerList;
         this.dateCreated = dateCreated;
+        this.userId = userId;
     }
 
     public void addAnswer(String answerDescription){

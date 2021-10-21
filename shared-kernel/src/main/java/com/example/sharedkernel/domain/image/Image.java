@@ -7,7 +7,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
-public class Image extends ValueObject {
+public class Image implements ValueObject {
 
     private final String imageName;
 

@@ -1,0 +1,25 @@
+.title-background {
+    background-size: cover;
+    background-position: center;
+    height: 702px;
+}
+
+
+.font {
+    font-family: OCR A Std, monospace;
+}
+
+.question-block {
+    background: rgb(2,0,36);
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(7,153,190,1) 30%, rgba(2,51,83,1) 77%);
+    height: 1000px;
+}
+
+.question-image {
+    width:100%;
+    height: 100%;
+}
+
+.question-info-block {
+    height: 400px;
+}

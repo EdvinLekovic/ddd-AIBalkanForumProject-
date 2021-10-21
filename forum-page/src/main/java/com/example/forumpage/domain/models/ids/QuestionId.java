@@ -14,4 +14,8 @@ public class QuestionId extends DomainObjectId {
     public QuestionId(@NonNull String uuid){
         super(uuid);
     }
+
+    public static QuestionId of(String uuid){
+        return new QuestionId(uuid);
+    }
 }
