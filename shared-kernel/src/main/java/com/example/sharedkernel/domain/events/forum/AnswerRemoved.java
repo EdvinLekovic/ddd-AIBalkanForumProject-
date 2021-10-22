@@ -7,16 +7,16 @@ import lombok.Getter;
 @Getter
 public class AnswerRemoved extends DomainEvent {
 
-    private String description;
+    private String answerId;
     private String questionId;
 
-    public AnswerRemoved(String topic) {
+    public AnswerRemoved() {
         super(TopicHolder.TOPIC_ANSWER_REMOVED);
     }
 
-    public AnswerRemoved(String topic, String description, String questionId) {
+    public AnswerRemoved(String answerId, String questionId) {
         super(TopicHolder.TOPIC_ANSWER_REMOVED);
-        this.description = description;
+        this.answerId = answerId;
         this.questionId = questionId;
     }
 }

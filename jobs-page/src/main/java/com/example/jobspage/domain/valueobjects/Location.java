@@ -1,19 +1,18 @@
 package com.example.jobspage.domain.valueobjects;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Embeddable;
 
 
 @Embeddable
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Location {
 
-    private String city;
-
-    private String country;
-
-    protected Location(){
-        this.city = null;
-        this.country = null;
-    }
+    private String countryAndCity;
 
 }

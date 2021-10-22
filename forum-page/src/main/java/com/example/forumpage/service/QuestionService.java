@@ -15,7 +15,7 @@ public interface QuestionService {
     Optional<Question> findById(QuestionId questionId);
     QuestionId createQuestion(QuestionForm questionForm);
     void deleteQuestion(QuestionId questionId);
-    void addAnswer(QuestionId questionId, AnswerForm answerForm);
+    void addAnswer(AnswerForm answerForm);
     void deleteAnswer(QuestionId questionId, AnswerId answerId);
     List<Answer> findAllAnswersByQuestion(QuestionId questionId);
 }

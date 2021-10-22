@@ -1,4 +1,4 @@
-package com.example.forumpage.infra;
+package com.example.jobspage.infra;
 
 import com.example.sharedkernel.domain.events.DomainEvent;
 import com.example.sharedkernel.infra.DomainEventPublisher;

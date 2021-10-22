@@ -14,7 +14,7 @@ public class QuestionCreated extends DomainEvent {
     private String description;
     private String userId;
 
-    public QuestionCreated(String topic) {
+    public QuestionCreated() {
         super(TopicHolder.TOPIC_QUESTION_CREATED);
     }
 

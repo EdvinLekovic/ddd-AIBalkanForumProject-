@@ -9,14 +9,16 @@ public class AnswerCreated extends DomainEvent {
 
     private String description;
     private String questionId;
+    private String userId;
 
-    public AnswerCreated(String topic) {
+    public AnswerCreated() {
         super(TopicHolder.TOPIC_ANSWER_CREATED);
     }
 
-    public AnswerCreated(String topic, String description, String questionId) {
+    public AnswerCreated(String description, String questionId,String userId) {
         super(TopicHolder.TOPIC_ANSWER_CREATED);
         this.description = description;
         this.questionId = questionId;
+        this.userId = userId;
     }
 }

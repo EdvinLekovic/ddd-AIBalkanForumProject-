@@ -32,8 +32,8 @@ public class QuestionResource {
     }
 
     @GetMapping("/{id}")
-    public Optional<Question> findQuestionById(@PathVariable QuestionId id) {
-        return questionService.findById(id);
+    public Optional<Question> findQuestionById(@PathVariable String id) {
+        return questionService.findById(new QuestionId(id));
     }
 
     @PostMapping("/createQuestion")
@@ -47,13 +47,13 @@ public class QuestionResource {
     }
 
     @PostMapping("/createAnswer")
-    public void createAnswer(QuestionId questionId, AnswerForm answerForm) {
-        questionService.addAnswer(questionId, answerForm);
+    public void createAnswer(@RequestBody AnswerForm answerForm) {
+        questionService.addAnswer(answerForm);
     }
 
     @DeleteMapping("/deleteAnswer/{questionId}/{answerId}")
-    public void deleteAnswer(@PathVariable QuestionId questionId,@PathVariable AnswerId answerId) {
-        questionService.deleteAnswer(questionId, answerId);
+    public void deleteAnswer(@PathVariable String questionId,@PathVariable String answerId) {
+        questionService.deleteAnswer(new QuestionId(questionId), new AnswerId(answerId));
     }
 
 

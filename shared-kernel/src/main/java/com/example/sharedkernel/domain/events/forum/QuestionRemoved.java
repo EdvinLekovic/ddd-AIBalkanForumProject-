@@ -12,7 +12,7 @@ public class QuestionRemoved extends DomainEvent {
     private String description;
     private String userId;
 
-    public QuestionRemoved(String topic) {
+    public QuestionRemoved() {
         super(TopicHolder.TOPIC_QUESTION_REMOVED);
     }
 

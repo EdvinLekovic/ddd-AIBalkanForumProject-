@@ -15,10 +15,10 @@ export const forumRepository = {
         return axios.get(forumPageUrl + `/${id}`)
     },
 
-    createQuestion: (title, description,userId) => {
-        console.log(title,description,userId);
+    createQuestion: (title, description, userId) => {
+        console.log(title, description, userId);
         return axios.post(forumPageUrl + "/createQuestion", {
-            answerList:[],
+            answerList: [],
             description: description,
             title: title,
             userId: userId
@@ -26,30 +26,32 @@ export const forumRepository = {
     },
 
     deleteQuestion: (id) => {
-        return axios.delete(forumPageUrl+`/deleteQuestion/${id}`,{
-            headers:{
-                "Authentication":"Bearer "+localStorage.getItem("token")
+        return axios.delete(forumPageUrl + `/deleteQuestion/${id}`, {
+            headers: {
+                "Authentication": "Bearer " + localStorage.getItem("token")
             }
         })
     },
 
-    createAnswer: (questionId,description) => {
-        return axios.post(forumPageUrl+`/createAnswer`, {
-            questionId:questionId,
-            answerForm: {
-                description: description
+    createAnswer: (description, questionId, userId) => {
+        return axios.post(forumPageUrl + `/createAnswer`, {
+                description: description,
+                questionId: questionId,
+                userId: userId
+            },
+            {
+                headers: {
+                    "Authentication":
+                        "Bearer " + localStorage.getItem("token")
+                }
             }
-        },{
-            headers:{
-                "Authentication":"Bearer "+localStorage.getItem("token")
-            }
-        })
+        )
     },
 
-    deleteAnswer: (questionId,answerId) => {
-        return axios.delete(forumPageUrl+`/deleteAnswer/${questionId}/${answerId}`,{
-            headers:{
-                "Authentication":"Bearer "+localStorage.getItem("token")
+    deleteAnswer: (questionId, answerId) => {
+        return axios.delete(forumPageUrl + `/deleteAnswer/${questionId}/${answerId}`, {
+            headers: {
+                "Authentication": "Bearer " + localStorage.getItem("token")
             }
         });
     }

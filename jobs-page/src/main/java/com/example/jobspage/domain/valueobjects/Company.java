@@ -10,8 +10,8 @@ import javax.persistence.Embeddable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category {
+public class Company {
 
-    private String categoryName;
-    
+   private String companyName;
+
 }

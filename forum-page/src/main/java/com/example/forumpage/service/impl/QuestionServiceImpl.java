@@ -10,6 +10,12 @@ import com.example.forumpage.domain.valueobjects.UserId;
 import com.example.forumpage.service.QuestionService;
 import com.example.forumpage.service.form.AnswerForm;
 import com.example.forumpage.service.form.QuestionForm;
+import com.example.sharedkernel.domain.events.DomainEvent;
+import com.example.sharedkernel.domain.events.forum.AnswerCreated;
+import com.example.sharedkernel.domain.events.forum.AnswerRemoved;
+import com.example.sharedkernel.domain.events.forum.QuestionCreated;
+import com.example.sharedkernel.domain.events.forum.QuestionRemoved;
+import com.example.sharedkernel.infra.DomainEventPublisher;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +29,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class QuestionServiceImpl implements QuestionService {
 
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
+    private final DomainEventPublisher domainEventPublisher;
 
     @Override
     public List<Question> findAll() {
@@ -44,21 +51,33 @@ public class QuestionServiceImpl implements QuestionService {
                         LocalDateTime.now(),
                         new UserId(questionForm.getUserId()));
         questionRepository.saveAndFlush(question);
+        domainEventPublisher.publish(new QuestionCreated(question.getId().getId(),
+                question.getTitle(),
+                question.getDescription(),
+                question.getUserId().getId()));
         return question.getId();
     }
 
     @Override
     public void deleteQuestion(QuestionId questionId) {
-        questionRepository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new QuestionNotFoundException(questionId));
         questionRepository.deleteById(questionId);
+        domainEventPublisher
+                .publish(new QuestionRemoved(questionId.getId(),
+                question.getTitle(),
+                question.getDescription(),
+                question.getUserId().getId()));
     }
 
     @Override
-    public void addAnswer(QuestionId questionId, AnswerForm answerForm) {
-        Question question = questionRepository.findById(questionId)
-                        .orElseThrow(() -> new QuestionNotFoundException(questionId));
-        question.addAnswer(answerForm.getDescription());
+    public void addAnswer(AnswerForm answerForm) {
+        Question question = questionRepository.findById(answerForm.getQuestionId())
+                        .orElseThrow(() -> new QuestionNotFoundException(answerForm.getQuestionId()));
+        question.addAnswer(answerForm.getDescription(),answerForm.getUserId(),LocalDateTime.now());
         questionRepository.saveAndFlush(question);
+        domainEventPublisher.publish(new AnswerCreated(answerForm.getDescription(),
+                answerForm.getQuestionId().getId(),
+                answerForm.getUserId().getId()));
     }
 
     @Override
@@ -67,6 +86,7 @@ public class QuestionServiceImpl implements QuestionService {
                 .orElseThrow(() -> new QuestionNotFoundException(questionId));
         question.delete(answerId);
         questionRepository.save(question);
+        domainEventPublisher.publish(new AnswerRemoved(answerId.getId(),questionId.getId()));
     }
 
     @Override

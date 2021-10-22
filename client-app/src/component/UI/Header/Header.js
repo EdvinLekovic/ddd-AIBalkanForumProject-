@@ -50,7 +50,7 @@ class Header extends React.Component {
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark navbar-fixed bg-dark fixed-top">
-                    <a className="navbar-brand" href="/home">AIBalkanForumProject</a>
+                    <a className="navbar-brand" href="/">AIBalkanForumProject</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarCollapse"
                             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@ class Header extends React.Component {
                                     <Link className="nav-link" to={"/forum"}>Forum</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <a className="nav-link">Jobs</a>
+                                    <Link className="nav-link" to={"/jobs"}>Jobs</Link>
                                 </li>
                             </ul>
                             <AuthenticationButton user={JSON.parse(localStorage.getItem("user"))}

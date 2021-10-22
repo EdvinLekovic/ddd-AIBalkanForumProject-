@@ -24,7 +24,7 @@ const Login = () => {
         const password = formData.password;
         await authenticate(username, password);
         await getUser();
-        history.push("/home");
+        history.push("/");
     }
 
     const authenticate = async (username, password)  => {
@@ -47,6 +47,7 @@ const Login = () => {
                 }).catch(error => console.log(error));
         }
     }
+
 
     return (
         <div className="d-flex pt-5 mt-5">

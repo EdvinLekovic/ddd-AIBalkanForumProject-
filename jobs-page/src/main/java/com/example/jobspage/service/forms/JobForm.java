@@ -2,8 +2,12 @@ package com.example.jobspage.service.forms;
 
 import com.example.jobspage.domain.model.enumeration.JobType;
 import com.example.jobspage.domain.valueobjects.Category;
+import com.example.jobspage.domain.valueobjects.Company;
 import com.example.jobspage.domain.valueobjects.Location;
+import com.example.jobspage.domain.valueobjects.UserId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobForm {
 
     @NotNull
@@ -21,7 +27,7 @@ public class JobForm {
     private String description;
 
     @NotNull
-    private String knowLedgeSkillsAndAbilities;
+    private String knowledgeSkillsAndAbilities;
 
     @NotNull
     private String experience;
@@ -36,6 +42,12 @@ public class JobForm {
     private Location location;
 
     @NotNull
-    Category category;
+    private Category category;
+
+    @NotNull
+    private Company company;
+
+    @NotNull
+    private UserId userId;
 
 }

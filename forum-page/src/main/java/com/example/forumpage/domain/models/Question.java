@@ -44,14 +44,15 @@ public class Question extends AbstractEntity<QuestionId> {
         this.userId = userId;
     }
 
-    public void addAnswer(String answerDescription){
+    public Answer addAnswer(String answerDescription,UserId userId,LocalDateTime dateCreated){
         Objects.requireNonNull(answerDescription,"answerUserId must not be null");
-        Answer answer = new Answer(answerDescription);
+        Answer answer = new Answer(answerDescription,userId,dateCreated);
         answerList.add(answer);
+        return answer;
     }
 
     public void delete(AnswerId answerId){
         Objects.requireNonNull(answerId,"Answer must not be null");
-        answerList.removeIf(a -> a.getId().equals(answerId));
+        answerList.removeIf(a -> a.getId().getId().equals(answerId.getId()));
     }
 }
